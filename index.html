@@ -34,8 +34,14 @@
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a { text-decoration: none; color: var(--ink-muted); font-size: 0.875rem; transition: color 0.2s; }
     .nav-links a:hover { color: var(--orange); }
-    .nav-cta { background: var(--orange); color: #fff; padding: 0.5rem 1.25rem; border: none; border-radius: var(--radius); font-size: 0.875rem; cursor: pointer; font-weight: 500; transition: background 0.2s; }
+    
+    /* Updated to apply cleanly to <a> tags */
+    .nav-cta { display: inline-block; text-decoration: none; text-align: center; background: var(--orange); color: #fff; padding: 0.5rem 1.25rem; border: none; border-radius: var(--radius); font-size: 0.875rem; cursor: pointer; font-weight: 500; transition: background 0.2s; }
     .nav-cta:hover { background: var(--orange-dark); }
+    .btn-primary { display: inline-block; text-decoration: none; text-align: center; background: var(--orange); color: #fff; padding: 0.75rem 1.75rem; border: none; border-radius: var(--radius); font-size: 1rem; cursor: pointer; font-weight: 500; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--orange-dark); }
+    .btn-ghost { display: inline-block; text-decoration: none; text-align: center; background: none; color: var(--ink-muted); padding: 0.75rem 1.25rem; border: 1px solid var(--border-strong); border-radius: var(--radius); font-size: 1rem; cursor: pointer; font-weight: 400; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--orange-mid); color: var(--orange); }
 
     /* WATERMARK */
     .watermark-section { position: relative; overflow: hidden; }
@@ -62,10 +68,6 @@
     .hero h1 span.gold { color: var(--gold-dark); }
     .hero p { font-size: 1.05rem; color: var(--ink-muted); font-weight: 300; max-width: 480px; margin-bottom: 2.5rem; }
     .hero-actions { display: flex; gap: 1rem; align-items: center; }
-    .btn-primary { background: var(--orange); color: #fff; padding: 0.75rem 1.75rem; border: none; border-radius: var(--radius); font-size: 1rem; cursor: pointer; font-weight: 500; transition: background 0.2s; }
-    .btn-primary:hover { background: var(--orange-dark); }
-    .btn-ghost { background: none; color: var(--ink-muted); padding: 0.75rem 1.25rem; border: 1px solid var(--border-strong); border-radius: var(--radius); font-size: 1rem; cursor: pointer; font-weight: 400; transition: all 0.2s; }
-    .btn-ghost:hover { border-color: var(--orange-mid); color: var(--orange); }
 
     .features { padding: 5rem 3rem; max-width: 1200px; margin: 0 auto; }
     .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--orange); font-weight: 500; margin-bottom: 0.75rem; }
@@ -126,9 +128,6 @@
     .cta-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.25rem; color: var(--ink); }
     .cta-section p { color: var(--ink-muted); font-weight: 300; font-size: 1.05rem; margin-bottom: 2rem; }
     .accent-line { display: inline-block; width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin: 0 auto 2rem; }
-    .contact-form { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-    .contact-form input { padding: 0.75rem 1rem; border: 1px solid var(--border-strong); border-radius: var(--radius); font-size: 0.95rem; background: var(--surface); color: var(--ink); width: 260px; outline: none; }
-    .contact-form input:focus { border-color: var(--orange); }
 
     footer { border-top: 1px solid var(--border); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; }
     .footer-logo-area { display: flex; align-items: center; gap: 8px; }
@@ -247,6 +246,45 @@
     .success-icon-wrap svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
     
     .success-msg { font-size: 14px; font-weight: 600; color: #1a1208; line-height: 1;}
+
+    /* =========================================
+       MOBILE RESPONSIVENESS
+       ========================================= */
+    @media (max-width: 992px) {
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 3rem; padding: 4rem 2rem; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .how-inner { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
+      .step { text-align: left; } 
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .how::before { display: none; } 
+    }
+
+    @media (max-width: 768px) {
+      nav { flex-wrap: wrap; padding: 1rem 1.5rem; }
+      .nav-links { display: none; } 
+      
+      .hero h1 { font-size: 2.2rem; }
+      .hero { padding: 3rem 1.5rem; }
+      
+      .phone { transform: scale(0.95); transform-origin: top center; margin: 0 auto; }
+      
+      .features { padding: 3rem 1.5rem; text-align: center; }
+      .features-grid { grid-template-columns: 1fr; }
+      .feature-icon { margin: 0 auto 1rem; }
+      
+      .how { padding: 3rem 1.5rem; }
+      
+      .cta-section { padding: 4rem 1.5rem; }
+      .cta-section h2 { font-size: 1.8rem; }
+      
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-links { justify-content: center; width: 100%; }
+    }
+    
+    @media (max-width: 380px) {
+      .phone { transform: scale(0.85); }
+    }
   </style>
 </head>
 <body>
@@ -261,7 +299,7 @@
     <a href="#how">How it works</a>
     <a href="#contact">Contact</a>
   </div>
-  <button class="nav-cta">Get in touch</button>
+  <a href="mailto:knowawl@gmail.com" class="nav-cta">Get in touch</a>
 </nav>
 
 <section class="hero watermark-section">
@@ -270,8 +308,8 @@
     <h1>Know Risks.<br><em>Know Rewards.</em><br><span class="gold">Know Awl!</span></h1>
     <p>Know Awl uses AI to streamline estimates, manage subcontractors, and surface project risks—before they become costly problems.</p>
     <div class="hero-actions">
-      <button class="btn-primary">Request a demo</button>
-      <button class="btn-ghost">Learn more</button>
+      <a href="mailto:knowawl@gmail.com" class="btn-primary">Request a demo</a>
+      <a href="#how" class="btn-ghost">Learn more</a>
     </div>
   </div>
   <div style="display:flex; flex-direction:column; align-items:center; gap:1.5rem;">
@@ -383,11 +421,12 @@
   <div class="cta-inner">
     <div class="accent-line"></div>
     <h2>Ready to see Know Awl in action?</h2>
-    <p>Leave your email and we'll be in touch to set up a personalized demo for your team.</p>
-    <div class="contact-form">
-      <input type="email" placeholder="Enter your work email" />
-      <button class="btn-primary">Request a demo</button>
+    <p>Reach out to us directly and we'll be in touch to set up a personalized demo for your team.</p>
+    
+    <div style="display: flex; justify-content: center; margin-top: 2rem;">
+      <a href="mailto:knowawl@gmail.com" class="btn-primary">Email us for a demo</a>
     </div>
+
   </div>
 </section>
 
@@ -400,7 +439,7 @@
   <div class="footer-links">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
-    <a href="#">Contact</a>
+    <a href="mailto:knowawl@gmail.com">Contact</a>
   </div>
 </footer>
 
@@ -464,7 +503,7 @@
       datasets: [
         {
           label: 'Actual',
-          data: [3.2, 5.1, 4.5, 7.8, 6.9, 11.5], // Updated: overall trend is up, but drops in Mar and May
+          data: [3.2, 5.1, 4.5, 7.8, 6.9, 11.5], 
           borderColor: greenMain,
           backgroundColor: 'rgba(82, 196, 26, 0.1)',
           borderWidth: 2,
@@ -475,7 +514,7 @@
         },
         {
           label: 'Projected',
-          data: [3.8, 5.0, 6.0, 7.5, 9.0, 12.0], // Smoothed out projection to complement the actual data
+          data: [3.8, 5.0, 6.0, 7.5, 9.0, 12.0], 
           borderColor: greenLight,
           backgroundColor: 'rgba(183, 235, 143, 0.15)',
           borderWidth: 2,
