@@ -224,6 +224,13 @@
     .legend-item { display: flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 600; color: var(--ink-muted); }
     .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
 
+    /* ACTION COMPLETED VISUAL STATE */
+    .action-completed {
+      opacity: 0.5 !important;
+      filter: grayscale(80%);
+      transition: all 0.4s ease;
+    }
+
     /* GLOWING PULSE DOTS */
     .pulse-dot {
       position: absolute;
@@ -406,7 +413,7 @@
     <div class="phone screen2" id="phone-demo">
       
       <div id="try-it-tooltip">
-        Now its your turn! ✨<br>
+        Now it's your turn to try! ✨<br>
         <span style="font-size: 11px; font-weight: 500; opacity: 0.9; display:block; margin-top:4px;">Tap the glowing dots to explore.</span>
       </div>
 
@@ -497,7 +504,7 @@
     <p style="font-style: italic; color: var(--orange-dark); font-weight: 600;">“A credit score for your construction business—plus the actions to improve it.” — Awl Score™</p>
     
     <div style="background: var(--orange-light); border-left: 4px solid var(--orange); padding: 1.25rem 1.5rem; border-radius: 4px; color: var(--ink); font-weight: 500; line-height: 1.6; margin-top: 2rem; font-size: 1.05rem;">
-      Know Awl partnered with multiple 9-figure contractors, each with 20+ years of experience, to develop a powerful, no-fluff tool designed specifically for contractors like you.
+      Know Awl partnered with multiple contractors with $5M+ businesses, with decades of experience, to develop a powerful, no-fluff tool designed specifically for contractors like you.
     </div>
   </div>
   
@@ -565,7 +572,6 @@
   const greenLight = rootStyles.getPropertyValue('--green-light').trim();
   const inkMuted = rootStyles.getPropertyValue('--ink-muted').trim();
   const inkDark = rootStyles.getPropertyValue('--ink').trim();
-  const orangeColor = rootStyles.getPropertyValue('--orange').trim();
 
   const awlLogoImg = new Image();
   awlLogoImg.src = 'awl_logo_final.jpg';
@@ -683,6 +689,7 @@
   let animationTimerPhone;
   let hasPromptedTry = false;
   let userHasInteracted = false;
+  let currentActiveTriggerId = null;
 
   const popupTemplates = {
     skyline: `
@@ -751,6 +758,8 @@
     if (key === 'cashflow') triggerId = 'cashflow-wrap';
     if (key === 'ceoInsights') triggerId = 'ceo-insights-pill';
     
+    currentActiveTriggerId = triggerId;
+
     if (triggerId) {
       document.getElementById(triggerId).classList.add('hide-pulse');
     }
@@ -769,6 +778,11 @@
     popupInitial.style.opacity = '0';
     popupInitial.style.pointerEvents = 'none';
     popupSuccess.classList.add('show');
+    
+    if (currentActiveTriggerId) {
+      document.getElementById(currentActiveTriggerId).classList.add('action-completed');
+    }
+
     setTimeout(closePhonePopup, 1500);
   };
 
@@ -791,11 +805,11 @@
   // INTERSECTION OBSERVERS (Scroll to Trigger)
   // -----------------------------------------
   
-  // 1. Phone Dashboard Animation Observer
   const phoneElement = document.getElementById('phone-demo');
   const phoneObserverOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
   
   function runPhoneAnimationSequence() {
+    currentActiveTriggerId = 'ceo-insights-pill';
     ceoInsightsPill.classList.add('simulated-hover');
     setTimeout(() => {
       ceoInsightsPill.classList.remove('simulated-hover');
@@ -827,12 +841,13 @@
 
   if (phoneElement) { phoneObserver.observe(phoneElement); }
 
-  // Manual Event Listeners for Phone Elements
+  // Manual Event Listeners
   skylinePill.addEventListener('click', () => openDynamicPopup('skyline'));
   downtownPill.addEventListener('click', () => openDynamicPopup('downtown'));
   donutWrap.addEventListener('click', () => openDynamicPopup('optimization'));
   cashflowWrap.addEventListener('click', () => openDynamicPopup('cashflow'));
   ceoInsightsPill.addEventListener('click', () => openDynamicPopup('ceoInsights'));
+  
   closePopupBtn.addEventListener('click', () => { clearTimeout(animationTimerPhone); closePhonePopup(); });
   popupOverlay.addEventListener('click', (e) => { if (e.target === popupOverlay) { clearTimeout(animationTimerPhone); closePhonePopup(); } });
 
