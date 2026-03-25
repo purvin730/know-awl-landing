@@ -68,7 +68,6 @@
     .hero-eyebrow { display: inline-block; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; background: var(--orange); padding: 0.45rem 1.2rem; border-radius: 30px; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(216,90,32,0.3); }
     
     .hero h1 { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.2rem, 3.5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: var(--ink); }
-    .hero h1 em { font-style: italic; color: var(--orange); }
     .hero h1 span.gold { color: var(--gold-dark); }
     .hero-actions { display: flex; gap: 1rem; align-items: center; }
 
@@ -380,19 +379,17 @@
 <section class="hero watermark-section">
   <div>
     <div class="hero-eyebrow">One score. Total clarity.</div>
-    <h1>Know the Numbers. <em>Know the Business.</em><br><span class="gold">Know Awl!</span></h1>
+    <h1>Know the Numbers. <span style="color: var(--orange);">Know the Business.</span><br><span class="gold">Know Awl!</span></h1>
     
     <div style="max-width: 480px;">
-      <p style="font-size: 1.05rem; color: var(--ink-muted); font-weight: 400; margin-bottom: 1.2rem;">Know Awl analyzes your entire construction business, from profit margins to AR to scheduling, and gives you a real-time Optimization Score, plus the insights your team needs to improve it. Everything is actionable with a few clicks!</p>
+      <p style="font-size: 1.05rem; color: var(--ink-muted); font-weight: 400; margin-bottom: 1.2rem;">Know Awl analyzes your entire business to give you a real-time AWL Score. From AR to scheduling, we highlight your biggest risks and serve up the exact, clickable steps needed to protect your bottom line.</p>
       
       <p style="font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; font-size: 0.95rem;">A single score built from what actually matters:</p>
       <ul style="list-style-type: none; margin-bottom: 1.5rem; color: var(--ink-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.4rem; padding-left: 0;">
         <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Overhead Rate</li>
         <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Running Profit Margin</li>
         <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Accounts Receivable (60–90+)</li>
-        <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Project Manager Billing</li>
-        <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Schedule Adherence</li>
-        <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Pipeline & New Leads</li>
+        <li style="font-style: italic; opacity: 0.8; margin-top: 4px;">and more...</li>
       </ul>
       
       <p style="font-style: italic; color: var(--orange-dark); margin-bottom: 2.5rem; font-weight: 700;">All weighted. All connected. Always up to date.</p>
@@ -424,9 +421,9 @@
         <canvas id="donut2" width="100" height="100"></canvas>
       </div>
 
-      <div class="active-pill" id="ceo-insights-pill" style="background: var(--ink); margin-bottom: 16px; justify-content: center; gap: 8px; cursor: pointer; position: relative;">
-        <div class="pulse-dot" style="top: -4px; right: -4px; background-color: var(--gold);"></div>
-        <div class="active-pill-name" style="color: var(--gold-light); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;">View CEO Insights & Risks</div>
+      <div class="active-pill gold" id="ceo-insights-pill" style="margin-bottom: 16px; justify-content: center; gap: 8px; cursor: pointer; position: relative;">
+        <div class="pulse-dot" style="top: -4px; right: -4px;"></div>
+        <div class="active-pill-name" style="color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">View CEO Insights & Risks</div>
       </div>
 
       <div class="section-head-phone">Cashflow Analysis</div>
@@ -497,7 +494,10 @@
     </ul>
     
     <p style="font-style: italic; color: var(--orange-dark); font-weight: 600;">“A credit score for your construction business—plus the actions to improve it.” — Awl Score™</p>
-    <p style="color: var(--ink-muted); margin-top: 1rem; font-weight: 400; line-height: 1.6;">Know Awl partnered with multiple 9-figure contractors, each with 20+ years of experience, to develop a powerful, no-fluff tool designed specifically for contractors like you.</p>
+    
+    <div style="background: var(--orange-light); border-left: 4px solid var(--orange); padding: 1.25rem 1.5rem; border-radius: 4px; color: var(--ink); font-weight: 500; line-height: 1.6; margin-top: 2rem; font-size: 1.05rem;">
+      Know Awl partnered with multiple 9-figure contractors, each with 20+ years of experience, to develop a powerful, no-fluff tool designed specifically for contractors like you.
+    </div>
   </div>
   
   <div class="features-grid">
@@ -604,11 +604,13 @@
             ctx.globalAlpha = 1.0; 
           }
 
+          // UPDATED: Text is back to black/ink, larger, bolder, no % sign
           ctx.fillStyle = inkDark;
-          ctx.font = `700 ${size === 'sm' ? 18 : 22}px DM Sans, sans-serif`;
+          ctx.font = `800 ${size === 'sm' ? 26 : 32}px DM Sans, sans-serif`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText('87%', cx, cy);
+          ctx.fillText('87', cx, cy - 2);
+          
           if (size !== 'sm') {
             ctx.fillStyle = inkMuted;
             ctx.font = '600 10px DM Sans, sans-serif';
@@ -721,7 +723,7 @@
     ceoInsights: `
       <div class="popup-title">CEO Weekly Summary <span>Business Health & Risks</span></div>
       <div style="font-size: 11px; color: var(--ink-muted); margin-bottom: 10px; line-height: 1.4;">
-        <strong>AWL Score: 87% (Stable)</strong><br>
+        <strong>AWL Score: 87 (Stable)</strong><br>
         Cashflow remains positive, but AR aging is creeping up.
       </div>
       <div style="font-size: 11px; color: var(--ink); font-weight: 700; margin-bottom: 6px;">Top Risks This Week:</div>
