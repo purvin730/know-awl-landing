@@ -125,7 +125,6 @@
     
     .chat-item.user-message { flex-direction: row-reverse; }
     
-    /* UPDATED AVATAR STYLES TO SUPPORT IMAGES */
     .chat-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 600; flex-shrink: 0; overflow: hidden; }
     .chat-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .chat-avatar.user { background: var(--ink); color: #fff; }
@@ -195,11 +194,15 @@
     .menu-icon { display: flex; flex-direction: column; gap: 3px; cursor: pointer; }
     .menu-icon span { display: block; width: 18px; height: 2px; background: var(--ink); border-radius: 2px; }
 
-    .score-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); text-align: center; margin-bottom: 10px; }
-    .donut-wrap { display: flex; justify-content: center; margin-bottom: 16px; }
+    .donut-wrap { display: flex; justify-content: center; margin-bottom: 16px; cursor: pointer; transition: transform 0.2s ease; position: relative; }
+    .donut-wrap:active { transform: scale(0.96); }
+    .cashflow-wrap { height: 110px; position: relative; margin-bottom: 14px; cursor: pointer; transition: transform 0.2s ease; position: relative; }
+    .cashflow-wrap:active { transform: scale(0.98); }
 
+    .score-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); text-align: center; margin-bottom: 10px; }
+    
     .screen2 .section-head-phone { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px; }
-    .cashflow-wrap { height: 110px; position: relative; margin-bottom: 14px; }
+    
     .proj-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
     .proj-month { font-size: 10px; font-weight: 600; color: var(--ink-muted); width: 54px; line-height: 1; }
     .proj-bar-track { flex: 1; height: 5px; background: rgba(0,0,0,0.04); border-radius: 3px; }
@@ -211,16 +214,39 @@
     .active-head span { color: var(--orange); }
     .active-head em { color: var(--ink-muted); font-style: normal; }
     
-    .active-pill { display: flex; align-items: center; justify-content: space-between; background: var(--orange); border-radius: 20px; padding: 9px 14px; margin-bottom: 6px; cursor: pointer; transition: transform 0.1s, box-shadow 0.2s; }
+    .active-pill { display: flex; align-items: center; justify-content: space-between; background: var(--orange); border-radius: 20px; padding: 10px 14px; margin-bottom: 6px; cursor: pointer; transition: transform 0.1s, box-shadow 0.2s; position: relative; }
     .active-pill:active, .active-pill.simulated-hover { transform: scale(0.98); }
     .active-pill.gold { background: var(--gold); }
-    .active-pill-name { font-size: 11px; color: #fff; font-weight: 600; line-height: 1;}
+    .active-pill-name { font-size: 11px; color: #fff; font-weight: 600; line-height: 1.2;}
+    .active-pill-sub { font-size: 9px; color: #fff; opacity: 0.85; margin-top: 3px; font-weight: 400; line-height: 1.2; }
     .active-pill-check { width: 16px; height: 16px; flex-shrink: 0; }
     .active-pill-check svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     
     .legend-row { display: flex; gap: 12px; margin-top: 4px; margin-bottom: 10px; }
     .legend-item { display: flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 600; color: var(--ink-muted); }
     .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* --- NEW: GLOWING PULSE DOTS --- */
+    .pulse-dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background-color: var(--orange);
+      border-radius: 50%;
+      z-index: 10;
+      animation: pulse 2s infinite;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .show-pulses .pulse-dot { opacity: 1; }
+    .hide-pulse .pulse-dot { opacity: 0 !important; display: none; }
+    
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(216, 90, 32, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(216, 90, 32, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(216, 90, 32, 0); }
+    }
 
     /* Phone Popup Modal Styles */
     .popup-overlay {
@@ -253,7 +279,7 @@
     .popup-btn {
       background: #fdf5e8; border: 1px solid rgba(180,120,30,0.2);
       border-radius: 14px; padding: 12px; display: flex; gap: 10px;
-      align-items: flex-start; cursor: pointer; transition: all 0.2s;
+      align-items: flex-start; cursor: pointer; transition: all 0.2s; margin-top: 12px;
     }
     .popup-btn:hover, .popup-btn.simulated-hover { background: #faebd7; transform: scale(0.98); }
     .popup-btn:active { transform: scale(0.98); }
@@ -283,6 +309,15 @@
     .success-icon-wrap svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
     
     .success-msg { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1;}
+
+    /* Interactive Tooltip Animation */
+    #try-it-tooltip {
+      position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+      background: var(--ink); color: #fff; padding: 16px 20px; border-radius: 12px;
+      font-size: 14px; font-weight: 700; box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+      z-index: 20; text-align: center; width: 80%;
+    }
 
     /* =========================================
        MOBILE RESPONSIVENESS
@@ -356,6 +391,12 @@
   <div style="display:flex; flex-direction:column; align-items:center; gap:1.5rem;">
     
     <div class="phone screen2">
+      
+      <div id="try-it-tooltip">
+        Animation complete! ✨<br>
+        <span style="font-size: 11px; font-weight: 500; opacity: 0.9; display:block; margin-top:4px;">Tap the glowing dots to explore.</span>
+      </div>
+
       <div class="phone-header">
         <div style="font-size:16px; color:var(--ink-muted); cursor:pointer; font-weight: bold;">‹</div>
         <div class="phone-title">CEO Dashboard</div>
@@ -363,12 +404,14 @@
       </div>
 
       <div class="score-label">Optimization Score</div>
-      <div class="donut-wrap">
+      <div class="donut-wrap" id="donut-wrap">
+        <div class="pulse-dot" style="top: 0; right: 80px;"></div>
         <canvas id="donut2" width="100" height="100"></canvas>
       </div>
 
       <div class="section-head-phone" style="margin-top:14px;">Cashflow Analysis</div>
-      <div class="cashflow-wrap">
+      <div class="cashflow-wrap" id="cashflow-wrap">
+        <div class="pulse-dot" style="top: -10px; right: 10px;"></div>
         <canvas id="cashflow"></canvas>
       </div>
       <div class="legend-row">
@@ -384,28 +427,29 @@
       <div class="active-head" style="margin-top:14px;"><span>Active</span> <em>projects</em></div>
       
       <div class="active-pill" id="skyline-pill">
-        <div class="active-pill-name">Skyline Tower Inspection</div>
+        <div class="pulse-dot" style="top: -6px; right: -6px;"></div>
+        <div>
+          <div class="active-pill-name">Skyline Inspection Pending</div>
+          <div class="active-pill-sub">$250k Risk to July Cashflow</div>
+        </div>
         <div class="active-pill-check"><svg viewBox="0 0 16 16"><polyline points="3,8 6,11 13,4"/></svg></div>
       </div>
-      <div class="active-pill gold"><div class="active-pill-name">Material Delivery Schedule</div><div class="active-pill-check"><svg viewBox="0 0 16 16"><polyline points="3,8 6,11 13,4"/></svg></div></div>
-      <div class="active-pill"><div class="active-pill-name">Client Meeting — 2PM</div><div class="active-pill-check"><svg viewBox="0 0 16 16"><polyline points="3,8 6,11 13,4"/></svg></div></div>
+      
+      <div class="active-pill gold" id="downtown-pill">
+        <div class="pulse-dot" style="top: -6px; right: -6px;"></div>
+        <div>
+          <div class="active-pill-name">Downtown Warehouse Remediation</div>
+          <div class="active-pill-sub">$500 AR Delay due to missing Approval</div>
+        </div>
+        <div class="active-pill-check"><svg viewBox="0 0 16 16"><polyline points="3,8 6,11 13,4"/></svg></div>
+      </div>
 
       <div class="popup-overlay" id="inspection-popup">
         <div class="popup-card">
           <div class="popup-close" id="close-popup">✕</div>
           
           <div id="popup-initial">
-            <div class="popup-title">Skyline Inspection <span>Pending Scheduling confirmation...</span></div>
-            <div class="popup-btn" id="send-text-btn">
-              <div class="popup-btn-icon">
-                <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg>
-              </div>
-              <div class="popup-btn-text">
-                <strong>Text Sam</strong>
-                "Can you follow up with inspector we should have a confirmed time by today."
-              </div>
             </div>
-          </div>
 
           <div id="popup-success">
             <div class="success-icon-wrap">
@@ -413,7 +457,6 @@
             </div>
             <div class="success-msg">Message Sent!</div>
           </div>
-
         </div>
       </div>
       
@@ -425,13 +468,14 @@
   <div class="section-label">Features</div>
   <div class="section-title">Everything your crew needs to know,<br>nothing they don't.</div>
   <div class="section-sub">Purpose-built for general contractors and construction firms—not generic project management software.</div>
+  
   <div class="features-grid">
-    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3"/><path d="M9 15h3l8.5-8.5a1.5 1.5 0 00-3-3L9 12v3"/></svg></div><h3>AI bid estimation</h3><p>Generate accurate, detailed estimates in minutes. Train the model on your past jobs for bids that match your margins.</p></div>
-    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Schedule intelligence</h3><p>Detect crew conflicts and cascade delays before they happen. Get automated alerts and re-schedule suggestions.</p></div>
-    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Subcontractor hub</h3><p>Manage bids, contracts, and communications with subs in one place. AI surfaces reliability scores from your history.</p></div>
+    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h3>People Hub</h3><p>Manage teams, contracts and communications in one place.</p></div>
     <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>Cost tracking</h3><p>Real-time budget vs. actual comparison across all jobs. Flag overruns the moment they emerge, not at closeout.</p></div>
-    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>Document AI</h3><p>Upload RFIs, submittals, and specs. Ask questions in plain English—Know Awl reads the docs so your team doesn't have to.</p></div>
     <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h3>Risk flagging</h3><p>AI monitors permit timelines, weather windows, and supply lead times to surface risks before they stall a job.</p></div>
+    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Schedule intelligence</h3><p>Detect crew conflicts and cascade delays before they happen. Get automated alerts and re-schedule suggestions.</p></div>
+    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>Document AI</h3><p>Upload RFIs, submittals, and specs. Ask questions in plain English—Know Awl reads the docs so your team doesn't have to.</p></div>
+    <div class="feature-cell"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3"/><path d="M9 15h3l8.5-8.5a1.5 1.5 0 00-3-3L9 12v3"/></svg></div><h3>AI bid estimation</h3><p>Generate accurate, detailed estimates in minutes. Train the model on your past jobs for bids that match your margins.</p></div>
   </div>
 </section>
 
@@ -450,7 +494,7 @@
     </div>
     
     <div class="how-visual">
-      <div class="card-label" style="margin-bottom:1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); text-align: center; font-weight: 700;">Know Awl chat — Job #7 Lakewood Plaza</div>
+      <div class="card-label" style="margin-bottom:1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); text-align: center; font-weight: 700;">Know Awl Chat — Your Company's Business Expert</div>
       <div class="chat-container" id="animated-chat-box">
         </div>
     </div>
@@ -484,7 +528,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-  // Colors retrieved from CSS variables for Chart.js
   const rootStyles = getComputedStyle(document.documentElement);
   const greenMain = rootStyles.getPropertyValue('--green-main').trim();
   const greenLight = rootStyles.getPropertyValue('--green-light').trim();
@@ -492,7 +535,7 @@
   const inkDark = rootStyles.getPropertyValue('--ink').trim();
 
   // -----------------------------------------
-  // CHART CONFIGURATIONS (Phone Mockup)
+  // CHART CONFIGURATIONS 
   // -----------------------------------------
   function drawDonut(id, pct, size) {
     new Chart(document.getElementById(id), {
@@ -509,10 +552,8 @@
       options: {
         responsive: false,
         cutout: size === 'sm' ? '72%' : '70%',
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: false }
-        }
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        events: [] // Disables internal chart hover so parent catches click better
       },
       plugins: [{
         id: 'centerText',
@@ -536,7 +577,6 @@
       }]
     });
   }
-
   drawDonut('donut2', 87, 'sm');
 
   new Chart(document.getElementById('cashflow'), {
@@ -573,6 +613,7 @@
       responsive: true,
       maintainAspectRatio: false,
       plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      events: [], // Disables internal chart hover so parent catches click better
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 9, weight: '600' }, color: inkMuted } },
         y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 9, weight: '600' }, color: inkMuted, callback: v => v + 'M' }, min: 0, max: 14 } 
@@ -581,48 +622,126 @@
   });
 
   // -----------------------------------------
-  // PHONE POPUP LOGIC
+  // DYNAMIC POPUP LOGIC
   // -----------------------------------------
   const skylinePill = document.getElementById('skyline-pill');
+  const downtownPill = document.getElementById('downtown-pill');
+  const donutWrap = document.getElementById('donut-wrap');
+  const cashflowWrap = document.getElementById('cashflow-wrap');
   const popupOverlay = document.getElementById('inspection-popup');
   const closePopupBtn = document.getElementById('close-popup');
-  const sendTextBtn = document.getElementById('send-text-btn');
   const popupInitial = document.getElementById('popup-initial');
   const popupSuccess = document.getElementById('popup-success');
+  
   let animationTimerPhone;
+  let hasPromptedTry = false;
+  let userHasInteracted = false;
 
-  function resetPhonePopup() {
+  const popupTemplates = {
+    skyline: `
+      <div class="popup-title">Skyline Inspection Pending <span>$250k Risk to July Cashflow...</span></div>
+      <div class="popup-btn" onclick="triggerPhoneSuccess()">
+        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+        <div class="popup-btn-text"><strong>Text Sam</strong> "Can you follow up with inspector we should have a confirmed time by today."</div>
+      </div>
+    `,
+    downtown: `
+      <div class="popup-title">Downtown Warehouse Remediation <span>$500 AR Delay - Missing Approval</span></div>
+      <div class="popup-btn" onclick="triggerPhoneSuccess()">
+        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+        <div class="popup-btn-text"><strong>Text Sarah</strong> "Please escalate the Downtown approval, it's blocking our AR draw."</div>
+      </div>
+    `,
+    cashflow: `
+      <div class="popup-title" style="margin-bottom: 8px;">Cashflow Risk Detected <span>Proj #123 Delay Impact</span></div>
+      <div style="font-size: 11px; color: var(--ink-muted); margin-bottom: 10px;">Potential risks to cashflow due to delays in project #123.</div>
+      <div style="font-size: 11px; color: var(--ink); font-weight: 700; margin-bottom: 6px;">Large AR Due in the Coming Month:</div>
+      <div style="font-size: 11px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 4px; margin-bottom: 4px; color: var(--ink-muted);"><span>City Center Phase 1</span> <strong style="color:var(--ink)">$340,000</strong></div>
+      <div style="font-size: 11px; display: flex; justify-content: space-between; color: var(--ink-muted); margin-bottom: 12px;"><span>Northside Medical</span> <strong style="color:var(--ink)">$185,000</strong></div>
+      <div class="popup-btn" onclick="triggerPhoneSuccess()">
+        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+        <div class="popup-btn-text"><strong>Message Finance</strong> "Hold vendor payments until #123 is billed."</div>
+      </div>
+    `,
+    optimization: `
+      <div class="popup-title">Optimization Alert <span>Overhead Rate Increasing</span></div>
+      <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 16px; line-height: 1.5;">
+        Follow up with <strong>Flow</strong>:<br>
+        Fixed costs are increasing <strong>>10%</strong> vs last month.
+      </div>
+      <div class="popup-btn" onclick="triggerPhoneSuccess()">
+        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+        <div class="popup-btn-text"><strong>Text Flow</strong> "Can we review the fixed cost variances this afternoon?"</div>
+      </div>
+    `
+  };
+
+  window.openDynamicPopup = function(key) {
+    userHasInteracted = true;
+    clearTimeout(animationTimerPhone);
+
+    // Hide the specific pulse dot when clicked
+    let triggerId = '';
+    if (key === 'skyline') triggerId = 'skyline-pill';
+    if (key === 'downtown') triggerId = 'downtown-pill';
+    if (key === 'optimization') triggerId = 'donut-wrap';
+    if (key === 'cashflow') triggerId = 'cashflow-wrap';
+    
+    if (triggerId) {
+      document.getElementById(triggerId).classList.add('hide-pulse');
+    }
+
+    // Hide tooltip if it's up
+    const tooltip = document.getElementById('try-it-tooltip');
+    if (tooltip) tooltip.style.opacity = '0';
+
+    popupInitial.innerHTML = popupTemplates[key];
     popupInitial.style.opacity = '1';
     popupInitial.style.pointerEvents = 'auto';
     popupSuccess.classList.remove('show');
-    skylinePill.classList.remove('simulated-hover');
-    sendTextBtn.classList.remove('simulated-hover');
-  }
+    popupOverlay.classList.add('show');
+  };
 
-  function closePhonePopup() {
-    popupOverlay.classList.remove('show');
-    setTimeout(() => {
-      resetPhonePopup();
-      animationTimerPhone = setTimeout(runPhoneAnimationSequence, 3000);
-    }, 300);
-  }
-
-  function triggerPhoneSuccess() {
+  window.triggerPhoneSuccess = function() {
     popupInitial.style.opacity = '0';
     popupInitial.style.pointerEvents = 'none';
     popupSuccess.classList.add('show');
     setTimeout(closePhonePopup, 1500);
+  };
+
+  function closePhonePopup() {
+    popupOverlay.classList.remove('show');
+    setTimeout(() => {
+      // Show tooltip once after animation ends, if user hasn't started manually clicking around
+      if (!hasPromptedTry && !userHasInteracted) {
+        hasPromptedTry = true;
+        // Turn on the glowing dots!
+        document.querySelector('.phone').classList.add('show-pulses');
+        setTimeout(() => {
+          const tooltip = document.getElementById('try-it-tooltip');
+          tooltip.style.opacity = '1';
+          setTimeout(() => { tooltip.style.opacity = '0'; }, 4500);
+        }, 500);
+      }
+    }, 300);
   }
 
+  // Auto-run animation exactly once
   function runPhoneAnimationSequence() {
     skylinePill.classList.add('simulated-hover');
     setTimeout(() => {
       skylinePill.classList.remove('simulated-hover');
+      popupInitial.innerHTML = popupTemplates['skyline'];
+      popupInitial.style.opacity = '1';
+      popupInitial.style.pointerEvents = 'auto';
+      popupSuccess.classList.remove('show');
       popupOverlay.classList.add('show');
+      
       setTimeout(() => {
-        sendTextBtn.classList.add('simulated-hover');
+        const btn = document.querySelector('.popup-btn');
+        if(btn) btn.classList.add('simulated-hover');
         setTimeout(() => {
-          sendTextBtn.classList.remove('simulated-hover');
+          if(btn) btn.classList.remove('simulated-hover');
           triggerPhoneSuccess();
         }, 400); 
       }, 1500); 
@@ -631,10 +750,15 @@
 
   animationTimerPhone = setTimeout(runPhoneAnimationSequence, 1000);
 
-  skylinePill.addEventListener('click', () => { clearTimeout(animationTimerPhone); resetPhonePopup(); popupOverlay.classList.add('show'); });
-  sendTextBtn.addEventListener('click', () => { clearTimeout(animationTimerPhone); triggerPhoneSuccess(); });
+  // Manual Event Listeners
+  skylinePill.addEventListener('click', () => openDynamicPopup('skyline'));
+  downtownPill.addEventListener('click', () => openDynamicPopup('downtown'));
+  donutWrap.addEventListener('click', () => openDynamicPopup('optimization'));
+  cashflowWrap.addEventListener('click', () => openDynamicPopup('cashflow'));
+  
   closePopupBtn.addEventListener('click', () => { clearTimeout(animationTimerPhone); closePhonePopup(); });
   popupOverlay.addEventListener('click', (e) => { if (e.target === popupOverlay) { clearTimeout(animationTimerPhone); closePhonePopup(); } });
+
 
   // -----------------------------------------
   // DYNAMIC CHAT ANIMATION ENGINE
@@ -664,12 +788,7 @@
         </div>
       `;
     }
-    
-    // Determine the content of the avatar circle
-    let avatarContent = msg.type === 'ai' 
-      ? `<img src="awl_logo_final.jpg" alt="Know Awl">` 
-      : msg.avatar;
-
+    let avatarContent = msg.type === 'ai' ? `<img src="awl_logo_final.jpg" alt="Know Awl">` : msg.avatar;
     return `
       <div class="chat-item ${msg.type}-message">
         <div class="chat-avatar ${msg.type}">${avatarContent}</div>
@@ -687,29 +806,22 @@
       }, 5000); 
       return;
     }
-
     const msg = chatSequence[currentMsgIndex];
-
     if (msg.type === 'ai') {
       chatContainer.insertAdjacentHTML('beforeend', createMessageHTML('thinking'));
       chatContainer.scrollTop = chatContainer.scrollHeight; 
-
       setTimeout(() => {
         const indicator = document.getElementById('thinking-indicator');
         if (indicator) indicator.remove();
-        
         chatContainer.insertAdjacentHTML('beforeend', createMessageHTML(msg));
         chatContainer.scrollTop = chatContainer.scrollHeight; 
         currentMsgIndex++;
-        
         setTimeout(processNextMessage, 3000); 
       }, 1500); 
-
     } else {
       chatContainer.insertAdjacentHTML('beforeend', createMessageHTML(msg));
       chatContainer.scrollTop = chatContainer.scrollHeight; 
       currentMsgIndex++;
-      
       setTimeout(processNextMessage, 3000);
     }
   }
