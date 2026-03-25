@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Know Awl - AI for Construction ::COMING SOON::</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Know Awl - AI for Construction</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -16,9 +17,8 @@
       --green-main: #52c41a; 
       --green-light: #b7eb8f; 
       
-      /* UPDATED TEXT COLORS: Much darker for higher contrast */
-      --ink: #000000;        /* Pure black for main headings and strong text */
-      --ink-muted: #382e22;  /* Deep dark brown/charcoal for paragraphs and secondary text */
+      --ink: #000000;        
+      --ink-muted: #382e22;  
       
       --surface: #fffdf9;
       --panel: #fdf5e8;
@@ -283,7 +283,7 @@
     .success-msg { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1;}
 
     /* =========================================
-       MOBILE RESPONSIVENESS
+       MOBILE RESPONSIVENESS (UPDATED)
        ========================================= */
     @media (max-width: 992px) {
       .hero { grid-template-columns: 1fr; text-align: center; gap: 3rem; padding: 4rem 2rem; }
@@ -301,14 +301,18 @@
       
       .hero h1 { font-size: 2.2rem; }
       .hero { padding: 3rem 1.5rem; }
+      .hero p { font-size: 1.1rem; } /* Bumping up reading text */
       
       .phone { transform: scale(0.95); transform-origin: top center; margin: 0 auto; }
       
       .features { padding: 3rem 1.5rem; text-align: center; }
       .features-grid { grid-template-columns: 1fr; }
       .feature-icon { margin: 0 auto 1rem; }
+      .feature-cell p { font-size: 1rem; } /* Bumping up feature text */
       
       .how { padding: 3rem 1.5rem; }
+      .step-content p { font-size: 1rem; } /* Bumping up step text */
+      .chat-bubble { font-size: 0.95rem; } /* Bumping up chat text */
       
       .cta-section { padding: 4rem 1.5rem; }
       .cta-section h2 { font-size: 1.8rem; }
