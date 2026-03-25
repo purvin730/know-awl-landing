@@ -385,6 +385,7 @@
       <p style="font-size: 1.05rem; color: var(--ink-muted); font-weight: 400; margin-bottom: 1.2rem;">Know Awl analyzes your entire business to give you a real-time AWL Score. From AR to scheduling, we highlight your biggest risks and serve up the exact, clickable steps needed to protect your bottom line.</p>
       
       <p style="font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; font-size: 0.95rem;">A single score built from what actually matters:</p>
+      
       <ul style="list-style-type: none; margin-bottom: 1.5rem; color: var(--ink-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.4rem; padding-left: 0;">
         <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Overhead Rate</li>
         <li><span style="color:var(--orange); font-weight:bold; margin-right:6px;">✓</span>Running Profit Margin</li>
@@ -402,7 +403,7 @@
   </div>
   <div style="display:flex; flex-direction:column; align-items:center; gap:1.5rem;">
     
-    <div class="phone screen2">
+    <div class="phone screen2" id="phone-demo">
       
       <div id="try-it-tooltip">
         Animation complete! ✨<br>
@@ -564,6 +565,7 @@
   const greenLight = rootStyles.getPropertyValue('--green-light').trim();
   const inkMuted = rootStyles.getPropertyValue('--ink-muted').trim();
   const inkDark = rootStyles.getPropertyValue('--ink').trim();
+  const orangeColor = rootStyles.getPropertyValue('--orange').trim();
 
   const awlLogoImg = new Image();
   awlLogoImg.src = 'awl_logo_final.jpg';
@@ -604,7 +606,6 @@
             ctx.globalAlpha = 1.0; 
           }
 
-          // UPDATED: Text is back to black/ink, larger, bolder, no % sign
           ctx.fillStyle = inkDark;
           ctx.font = `800 ${size === 'sm' ? 26 : 32}px DM Sans, sans-serif`;
           ctx.textAlign = 'center';
@@ -786,7 +787,14 @@
     }, 300);
   }
 
-  // Auto-run animation exactly once
+  // -----------------------------------------
+  // INTERSECTION OBSERVERS (Scroll to Trigger)
+  // -----------------------------------------
+  
+  // 1. Phone Dashboard Animation Observer
+  const phoneElement = document.getElementById('phone-demo');
+  const phoneObserverOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
+  
   function runPhoneAnimationSequence() {
     ceoInsightsPill.classList.add('simulated-hover');
     setTimeout(() => {
@@ -808,21 +816,29 @@
     }, 200); 
   }
 
-  animationTimerPhone = setTimeout(runPhoneAnimationSequence, 1000);
+  const phoneObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animationTimerPhone = setTimeout(runPhoneAnimationSequence, 600);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, phoneObserverOptions);
 
-  // Manual Event Listeners
+  if (phoneElement) { phoneObserver.observe(phoneElement); }
+
+  // Manual Event Listeners for Phone Elements
   skylinePill.addEventListener('click', () => openDynamicPopup('skyline'));
   downtownPill.addEventListener('click', () => openDynamicPopup('downtown'));
   donutWrap.addEventListener('click', () => openDynamicPopup('optimization'));
   cashflowWrap.addEventListener('click', () => openDynamicPopup('cashflow'));
   ceoInsightsPill.addEventListener('click', () => openDynamicPopup('ceoInsights'));
-  
   closePopupBtn.addEventListener('click', () => { clearTimeout(animationTimerPhone); closePhonePopup(); });
   popupOverlay.addEventListener('click', (e) => { if (e.target === popupOverlay) { clearTimeout(animationTimerPhone); closePhonePopup(); } });
 
 
   // -----------------------------------------
-  // DYNAMIC CHAT ANIMATION ENGINE
+  // DYNAMIC CHAT ANIMATION ENGINE (Observed)
   // -----------------------------------------
   const chatContainer = document.getElementById('animated-chat-box');
   const chatSequence = [
@@ -887,7 +903,16 @@
     }
   }
 
-  setTimeout(processNextMessage, 1500);
+  const chatObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(processNextMessage, 800);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (chatContainer) { chatObserver.observe(chatContainer); }
 
 </script>
 
