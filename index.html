@@ -194,7 +194,8 @@
     .phone {
       background: #ffffff;
       border-radius: 32px;
-      width: 300px;
+      /* UPDATED: Made slightly wider (from 300px to 330px) */
+      width: 330px; 
       min-height: 560px;
       padding: 24px 20px;
       border: 1px solid rgba(0,0,0,0.06); 
@@ -204,6 +205,8 @@
     }
     .phone-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
     .phone-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+    .menu-icon { display: flex; flex-direction: column; gap: 3px; cursor: pointer; }
+    .menu-icon span { display: block; width: 18px; height: 2px; background: var(--ink); border-radius: 2px; }
 
     .donut-wrap { display: flex; justify-content: center; margin-bottom: 16px; cursor: pointer; transition: transform 0.2s ease; position: relative; }
     .donut-wrap:active { transform: scale(0.96); }
@@ -441,7 +444,7 @@
       
       <div id="try-it-tooltip">
         Now it's your turn to try! ✨<br>
-        <span style="font-size: 11px; font-weight: 500; opacity: 0.9; display:block; margin-top:6px; line-height: 1.4;">Your <span style="color: var(--orange); font-weight: 700;">Awl</span> <span style="color: #fff; font-weight: 700;">Score</span> is like a credit score for your business!</span>
+        <span style="font-size: 11px; font-weight: 500; opacity: 0.9; display:block; margin-top:6px; line-height: 1.4;">Your <span style="color: var(--orange); font-weight: 700;">Awl</span> <span style="color: #fff; font-weight: 700;">Score</span> is a like a credit score for your business!</span>
         <span style="font-size: 11px; font-weight: 700; color: var(--gold-light); display:block; margin-top:6px;">Tap the glowing dots to take action.</span>
       </div>
 
@@ -453,7 +456,7 @@
 
       <div class="score-label"><span style="color:var(--orange);">AWL</span> <span style="color:var(--ink);">Score™</span></div>
       <div class="donut-wrap" id="donut-wrap">
-        <div class="pulse-dot" style="top: 0; right: 80px;"></div>
+        <div class="pulse-dot" style="top: 0; right: calc(50% - 45px);"></div>
         <canvas id="donut2" width="100" height="100"></canvas>
       </div>
 
@@ -894,7 +897,6 @@
       popupOverlay.classList.add('show');
       
       setTimeout(() => {
-        // Will auto-click the first button (Text)
         const btn = document.querySelector('.popup-btn');
         if(btn) btn.classList.add('simulated-hover');
         setTimeout(() => {
