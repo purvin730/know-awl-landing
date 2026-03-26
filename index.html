@@ -301,6 +301,13 @@
     .popup-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 16px; padding-right: 15px; line-height: 1.4; }
     .popup-title span { color: var(--orange); display: block; font-weight: 600; font-size: 12px; margin-top: 2px; text-transform: none; }
     
+    /* NEW DRAFT BOX */
+    .draft-box {
+      background: #fdf5e8; border: 1px solid rgba(180,120,30,0.2); 
+      border-radius: 10px; padding: 10px 12px; font-size: 11px; 
+      color: var(--ink-muted); margin-bottom: 12px; line-height: 1.4;
+    }
+
     .popup-btn {
       background: #fdf5e8; border: 1px solid rgba(180,120,30,0.2);
       border-radius: 14px; padding: 12px; display: flex; gap: 10px;
@@ -716,16 +723,34 @@
   const popupTemplates = {
     skyline: `
       <div class="popup-title">Skyline Inspection Pending <span>$250k Risk to July Cashflow...</span></div>
-      <div class="popup-btn" onclick="triggerPhoneSuccess()">
-        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
-        <div class="popup-btn-text"><strong>Text Sam</strong> "Can you follow up with inspector we should have a confirmed time by today."</div>
+      <div class="draft-box">
+        <strong>Draft:</strong> "Can you follow up with inspector we should have a confirmed time by today."
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px;"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Text Sam</strong></div>
+        </div>
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px; background: var(--ink);"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Email Sam</strong></div>
+        </div>
       </div>
     `,
     downtown: `
       <div class="popup-title">Downtown Warehouse Remediation <span>$500 AR Delay - Missing Approval</span></div>
-      <div class="popup-btn" onclick="triggerPhoneSuccess()">
-        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
-        <div class="popup-btn-text"><strong>Text Sarah</strong> "Please escalate the Downtown approval, it's blocking our AR draw."</div>
+      <div class="draft-box">
+        <strong>Draft:</strong> "Please escalate the Downtown approval, it's blocking our AR draw."
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px;"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Text Sarah</strong></div>
+        </div>
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px; background: var(--ink);"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Email Sarah</strong></div>
+        </div>
       </div>
     `,
     cashflow: `
@@ -733,38 +758,65 @@
       <div style="font-size: 11px; color: var(--ink-muted); margin-bottom: 10px;">Potential risks to cashflow due to delays in project #123.</div>
       <div style="font-size: 11px; color: var(--ink); font-weight: 700; margin-bottom: 6px;">Large AR Due in the Coming Month:</div>
       <div style="font-size: 11px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 4px; margin-bottom: 4px; color: var(--ink-muted);"><span>City Center Phase 1</span> <strong style="color:var(--ink)">$340,000</strong></div>
-      <div style="font-size: 11px; display: flex; justify-content: space-between; color: var(--ink-muted); margin-bottom: 12px;"><span>Northside Medical</span> <strong style="color:var(--ink)">$185,000</strong></div>
-      <div class="popup-btn" onclick="triggerPhoneSuccess()">
-        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
-        <div class="popup-btn-text"><strong>Message Finance</strong> "Hold vendor payments until #123 is billed."</div>
+      <div style="font-size: 11px; display: flex; justify-content: space-between; color: var(--ink-muted); margin-bottom: 10px;"><span>Northside Medical</span> <strong style="color:var(--ink)">$185,000</strong></div>
+      <div class="draft-box">
+        <strong>Draft:</strong> "Hold vendor payments until #123 is billed."
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px;"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Text Finance</strong></div>
+        </div>
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px; background: var(--ink);"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Email Finance</strong></div>
+        </div>
       </div>
     `,
     optimization: `
       <div class="popup-title"><b style="color: var(--orange); font-weight: inherit;">Awl</b> Alert <span>Overhead Rate Increasing</span></div>
-      <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 16px; line-height: 1.5;">
+      <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 12px; line-height: 1.5;">
         Follow up with <strong>Flow</strong>:<br>
         Fixed costs are increasing <strong>>10%</strong> vs last month.
       </div>
-      <div class="popup-btn" onclick="triggerPhoneSuccess()">
-        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
-        <div class="popup-btn-text"><strong>Text Flow</strong> "Can we review the fixed cost variances this afternoon?"</div>
+      <div class="draft-box">
+        <strong>Draft:</strong> "Can we review the fixed cost variances this afternoon?"
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px;"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Text Flow</strong></div>
+        </div>
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px; background: var(--ink);"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Email Flow</strong></div>
+        </div>
       </div>
     `,
     ceoInsights: `
       <div class="popup-title">CEO Weekly Summary <span>Business Health & Risks</span></div>
-      <div style="font-size: 11px; color: var(--ink-muted); margin-bottom: 10px; line-height: 1.4;">
+      <div style="font-size: 11px; color: var(--ink-muted); margin-bottom: 8px; line-height: 1.4;">
         <strong><span style="color: var(--orange);">AWL</span> <span style="color: var(--ink);">Score</span>: 87 (Stable)</strong><br>
         Cashflow remains positive, but AR aging is creeping up.
       </div>
-      <div style="font-size: 11px; color: var(--ink); font-weight: 700; margin-bottom: 6px;">Top Risks This Week:</div>
-      <ul style="font-size: 11px; color: var(--orange-dark); margin-left: 14px; margin-bottom: 12px; line-height: 1.4; font-weight: 500;">
+      <div style="font-size: 11px; color: var(--ink); font-weight: 700; margin-bottom: 4px;">Top Risks This Week:</div>
+      <ul style="font-size: 11px; color: var(--orange-dark); margin-left: 14px; margin-bottom: 10px; line-height: 1.4; font-weight: 500;">
         <li>$500k AR over 60 days (Downtown)</li>
         <li>Fixed overhead increased by 11%</li>
         <li>Project manager billing delayed on 2 jobs</li>
       </ul>
-      <div class="popup-btn" onclick="triggerPhoneSuccess()">
-        <div class="popup-btn-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
-        <div class="popup-btn-text"><strong>Message Leadership Team</strong> "Please review the weekly risk report. Need action plans on AR and Overhead today."</div>
+      <div class="draft-box">
+        <strong>Draft:</strong> "Please review the weekly risk report. Need action plans on AR and Overhead today."
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 8px 4px; flex-direction: column; align-items: center; gap: 4px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px;"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Text Execs</strong></div>
+        </div>
+        <div class="popup-btn" onclick="triggerPhoneSuccess()" style="flex: 1; margin-top: 0; padding: 8px 4px; flex-direction: column; align-items: center; gap: 4px;">
+          <div class="popup-btn-icon" style="width: 24px; height: 24px; background: var(--ink);"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div class="popup-btn-text" style="text-align: center;"><strong style="margin-bottom: 0; font-size: 10px;">Email Execs</strong></div>
+        </div>
       </div>
     `
   };
@@ -842,6 +894,7 @@
       popupOverlay.classList.add('show');
       
       setTimeout(() => {
+        // Will auto-click the first button (Text)
         const btn = document.querySelector('.popup-btn');
         if(btn) btn.classList.add('simulated-hover');
         setTimeout(() => {
