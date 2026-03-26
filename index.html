@@ -65,6 +65,7 @@
 
     .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 5rem 3rem; max-width: 1200px; margin: 0 auto; }
     
+    /* UPDATED EYEBROW PILL */
     .hero-eyebrow { 
       display: inline-block; 
       font-size: 1rem; 
@@ -200,7 +201,6 @@
       position: relative;
       overflow: hidden; 
       box-shadow: 0 24px 48px rgba(0,0,0,0.05); 
-      /* UPDATED: Added transition logic for the hover/scroll scaling */
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
       z-index: 1;
     }
@@ -899,7 +899,8 @@
   
   const phoneElement = document.getElementById('phone-demo');
   const phoneObserverOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
-  
+  let phoneAnimationPlayed = false;
+
   function runPhoneAnimationSequence() {
     currentActiveTriggerId = 'ceo-insights-pill';
     ceoInsightsPill.classList.add('simulated-hover');
@@ -912,7 +913,6 @@
       popupOverlay.classList.add('show');
       
       setTimeout(() => {
-        // Auto click the first button (text)
         const btn = document.querySelector('.popup-btn');
         if(btn) btn.classList.add('simulated-hover');
         setTimeout(() => {
@@ -923,11 +923,16 @@
     }, 200); 
   }
 
-  const phoneObserver = new IntersectionObserver((entries, observer) => {
+  const phoneObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        animationTimerPhone = setTimeout(runPhoneAnimationSequence, 600);
-        observer.unobserve(entry.target);
+        entry.target.classList.add('is-visible');
+        if (!phoneAnimationPlayed) {
+          phoneAnimationPlayed = true;
+          animationTimerPhone = setTimeout(runPhoneAnimationSequence, 600);
+        }
+      } else {
+        entry.target.classList.remove('is-visible');
       }
     });
   }, phoneObserverOptions);
