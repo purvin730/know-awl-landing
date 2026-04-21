@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Know Awl - AI for Construction</title>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Know Awl - AI for Construction</title>
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.knowawl.com/"> <meta property="og:title" content="Know Awl - AI for Construction">
-  <meta property="og:description" content="One score. Total clarity. Know Awl analyzes your entire business to give you a real-time Awl Score.">
-  <meta property="og:image" content="https://www.knowawl.com/preview-image.jpg"> <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://www.knowawl.com/"> <meta name="twitter:title" content="Know Awl - AI for Construction">
-  <meta name="twitter:description" content="One score. Total clarity. Know Awl analyzes your entire business to give you a real-time Awl Score.">
-  <meta name="twitter:image" content="https://www.knowawl.com/preview-image.jpg"> <style>
-  /* ... rest of your styles ... */
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -200,6 +186,22 @@
     .cta-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.25rem; color: var(--ink); }
     .cta-section p { color: var(--ink-muted); font-weight: 400; font-size: 1.1rem; margin-bottom: 2rem; }
 
+    /* EULA SECTION */
+    .eula-section { padding: 4rem 3rem; background: var(--surface); text-align: left; border-top: 1px solid var(--border); }
+    .eula-inner { max-width: 1000px; margin: 0 auto; }
+    .eula-title { font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
+    .eula-box { 
+      background: #fff; border: 1px solid var(--border-strong); border-radius: 8px; 
+      padding: 1.5rem; height: 250px; overflow-y: auto; font-size: 0.85rem; 
+      color: var(--ink-muted); line-height: 1.6; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .eula-box h3 { font-size: 1rem; color: var(--ink); margin-top: 1rem; margin-bottom: 0.5rem; }
+    .eula-box h3:first-child { margin-top: 0; }
+    .eula-box p { margin-bottom: 0.75rem; }
+    .eula-box::-webkit-scrollbar { width: 8px; }
+    .eula-box::-webkit-scrollbar-track { background: var(--panel); border-radius: 4px; }
+    .eula-box::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+
     footer { border-top: 1px solid var(--border); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; }
     .footer-logo-area { display: flex; align-items: center; gap: 8px; }
     .footer-logo-img { width: 28px; height: 28px; object-fit: contain; border-radius: 6px; }
@@ -336,6 +338,9 @@
       .chat-bubble { font-size: 0.95rem; } 
       .cta-section { padding: 4rem 1.5rem; }
       .cta-section h2 { font-size: 1.8rem; }
+      
+      .eula-section { padding: 3rem 1.5rem; }
+      
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
       .footer-links { justify-content: center; width: 100%; }
     }
@@ -582,6 +587,34 @@
   </div>
 </section>
 
+<section class="eula-section animate-up" id="eula">
+  <div class="eula-inner">
+    <div class="eula-title">End User License Agreement (EULA)</div>
+    <div class="eula-box">
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing or using <strong style="color: var(--ink);">Know</strong> <strong style="color: var(--orange);">Awl</strong> ("Software"), you agree to be bound by the terms of this End User License Agreement. If you do not agree to these terms, do not use the Software.</p>
+      
+      <h3>2. License Grant</h3>
+      <p><strong style="color: var(--ink);">Know</strong> <strong style="color: var(--orange);">Awl</strong> grants you a revocable, non-exclusive, non-transferable, limited license to download, install, and use the Software strictly in accordance with the terms of this Agreement and for your internal business purposes within the construction and contracting industry.</p>
+      
+      <h3>3. Data Privacy & Analytics</h3>
+      <p>The Software analyzes construction data, financial metrics, and operational workflows to generate insights and the <strong style="color: var(--orange);">Awl</strong> <strong style="color: var(--ink);">Score</strong>. By using the Software, you consent to the collection, processing, and storage of your inputted data in accordance with our Privacy Policy. <strong style="color: var(--ink);">Know</strong> <strong style="color: var(--orange);">Awl</strong> employs industry-standard security measures to protect your proprietary business information.</p>
+      
+      <h3>4. Restrictions</h3>
+      <p>You agree not to, and you will not permit others to: (a) license, sell, rent, lease, assign, distribute, transmit, host, outsource, disclose, or otherwise commercially exploit the Software; (b) copy or use the Software for any purpose other than as permitted under the above section; (c) modify, make derivative works of, disassemble, decrypt, reverse compile, or reverse engineer any part of the Software.</p>
+      
+      <h3>5. Modifications to Software</h3>
+      <p><strong style="color: var(--ink);">Know</strong> <strong style="color: var(--orange);">Awl</strong> reserves the right to modify, suspend or discontinue, temporarily or permanently, the Software or any service to which it connects, with or without notice and without liability to you.</p>
+      
+      <h3>6. Term and Termination</h3>
+      <p>This Agreement shall remain in effect until terminated by you or <strong style="color: var(--ink);">Know</strong> <strong style="color: var(--orange);">Awl</strong>. <strong style="color: var(--ink);">Know</strong> <strong style="color: var(--orange);">Awl</strong> may, in its sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice.</p>
+      
+      <h3>7. Limitation of Liability</h3>
+      <p>Notwithstanding any damages that you might incur, the entire liability of <strong style="color: var(--ink);">Know</strong> <strong style="color: var(--orange);">Awl</strong> and any of its suppliers under any provision of this Agreement and your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by you for the Software.</p>
+    </div>
+  </div>
+</section>
+
 <footer class="animate-up">
   <div class="footer-logo-area">
     <img class="footer-logo-img" src="awl_logo_final.jpg" alt="Know Awl" />
@@ -591,6 +624,7 @@
   <div class="footer-links">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
+    <a href="#eula">EULA</a>
     <a href="mailto:knowawl@gmail.com">Contact</a>
   </div>
 </footer>
@@ -942,7 +976,6 @@
     if (phoneAnimationPlayed) return;
     phoneAnimationPlayed = true;
 
-    // Ensure it's marked as visible to apply scaling correctly
     if (phoneElement) phoneElement.classList.add('is-visible');
 
     currentActiveTriggerId = 'ceo-insights-pill';
